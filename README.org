@@ -6,3 +6,5 @@
 *** 为什么要翻译此文档
     为准备使用Emacs+Slime开发Clojure程序的程序员提供支持。
     
+*** 关于此文档
+    此文档翻译自Slime User Manual version 3.0-alpha。
