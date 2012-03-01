@@ -1,0 +1,8 @@
+* Slime用户手册中文翻译版
+
+*** Slime简介
+    Slime是一个Emacs下的开发Lisp的交互式环境。
+
+*** 为什么要翻译此文档
+    为准备使用Emacs+Slime开发Clojure程序的程序员提供支持。
+    
