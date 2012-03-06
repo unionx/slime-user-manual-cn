@@ -184,5 +184,50 @@ Emacs命令M-x slime可以启动Slime。它使用inferior-lisp包来启动一个
 (sbcl-cvs ("/home/me/sbcl-cvs/src/runtime/sbcl"
 	   "--core" "/home/me/sbcl-cvs/output/sbcl.core") :env ("SBCL_HOME=/home/me/sbcl-cvs/contrib/"))
 #+END_SRC
-	   在子进程中初始化SBCL_HOME。
+在子进程中初始化SBCL_HOME。
 
+
+*** 2.5.3 更快地加载Swank
+
+
+对于SBCL，我们建议你新建一个有socket支持和POSIX绑定的核心配置文件，因为这些模块加载起来很耗时。为了新建一个这样的核心，执行以下的命令：
+
+
+#+BEGIN_SRC sh
+shell$ sbcl
+* (mapc 'require '(sb-bsd-sockets sb-posix sb-introspect sb-cltl2 asdf))
+* (save-lisp-and-die "sbcl.core-for-slime")
+#+END_SRC
+
+
+然后，在你的.emacs文件里加入如下代码：
+
+
+#+BEGIN_SRC emacs-lisp
+(setq slime-lisp-implementations
+      '((sbcl ("sbcl" "--core" "sbcl.core-for-slime"))))
+#+END_SRC
+
+
+为了最大化启动速度，你可以在核心文件里直接包含Swank服务器。这样做的缺点是设置的时候比较麻烦，并且当你想升级你的Slime或者SBCL的时候你要新建一个核心文件。这样做的步骤是：
+
+
+#+BEGIN_SRC sh
+shell$ sbcl
+* (load ".../slime/swank-loader.lisp")
+* (swank-loader:dump-image "sbcl.core-with-swank")
+#+END_SRC
+
+
+然后在.emacs里加入如下代码：
+
+
+#+BEGIN_SRC emacs-lisp
+(setq slime-lisp-implementations
+      '((sbcl
+	 ("sbcl" "--core" "sbcl.core-with-swank") :init (lambda (port-file _)
+							  ·(format "(swank:start-server %S)\n" port-file)))))
+#+END_SRC
+
+
+类似的配置对其它Lisp实现也适用。
