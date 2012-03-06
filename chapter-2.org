@@ -224,9 +224,8 @@ shell$ sbcl
 
 #+BEGIN_SRC emacs-lisp
 (setq slime-lisp-implementations
-      '((sbcl ("sbcl" "--core" "sbcl.core-with-swank") 
-	      :init (lambda (port-file _)
-		      ·(format "(swank:start-server %S)\n" port-file)))))
+      '((sbcl ("sbcl" "--core" "sbcl.core-with-swank") :init (lambda (port-file _)
+	      (format "(swank:start-server %S)\n" port-file)))))
 #+END_SRC
 
 
