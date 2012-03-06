@@ -120,3 +120,70 @@ Emacs命令M-x slime可以启动Slime。它使用inferior-lisp包来启动一个
 ** 2.5 调整设置
 
 
+这一部分说明了如何减少Slime的启动时间和如何为多Lisp系统配置Slime。
+
+
+在进行本部分之前请确认你的基本配置已经可以工作。如果你对基本配置感到满意，那么请跳过这部分。
+
+
+关于附加模块请看“8.1 加载扩展包”。
+
+
+*** 2.5.1 自动加载
+
+
+基本设置始终会加载Slime，即使你不使用它。如果你只在需要的时候才加载Slime，那么Emacs会启动的快一点。要这样，你需要稍微更改你的.emacs文件：
+
+
+#+BEGIN_SRC emacs-lisp
+(setq inferior-lisp-program "the path to your Lisp system")
+(add-to-list 'load-path "the path of your slime directory")
+(require 'slime-autoloads)
+(slime-setup)
+#+END_SRC
+
+跟基本配置相比，差别只在这一行(require 'slime-autoloads)。它告诉Emacs当M-x slime或者M-x slime-connect命令第一次执行之后Slime的其它部分会被自动加载。
+
+
+*** 2.5.2 多种Lisp
+
+
+默认情况下，M-x slime命令启动的程序是由inferior-lisp-program指定的。如果你在执行M-x slime命令时添加了一个前缀参数，Emacs会启动参数中指定的程序。如果你需要经常使用它或者命令的名称太长，那么在.emacs文件里设置slime-lisp-implementations变量则较为方便。例如，在这里我们定义了两个程序：
+
+
+#+BEGIN_SRC emacs-lisp
+(setq slime-lisp-implementations
+      '((cmucl ("cmucl" "-quiet"))
+	(sbcl ("/opt/sbcl/bin/sbcl") :coding-system utf-8-unix)))
+#+END_SRC
+
+
+这个变量包含了一个Lisp程序的列表，如果你通过一个减号前缀参数启动Slime，M-- M-x sliem，你可以从这个列表里选择一个程序。当不加前缀地启动该命令，slime-default-lisp变量里指定的程序或者是列表中的第一项会被使用。列表的元素应该像这样：
+
+
+#+BEGIN_SRC emacs-lisp
+(NAME (PROGRAM PROGRAM-ARGS...) &key CODING-SYSTEM INIT INIT-FUNCTION ENV)
+#+END_SRC
+
+
+- NAME
+  是一个符号，用来指定Lisp程序
+- PROGRAM
+  是程序的文件名。注意文件名可以包含空格。
+- PROGRAM-ARGS
+  是一个命令行参数的列表。
+- CODING-SYSTEM
+  指定了连接的编码系统（见6.1 Emacs端 slime-net-coding-system）。
+- INIT
+  应该是一个接受两个参数的函数：一个文件名和一个字符编码。这个函数应该返回一个字符串格式的Lisp表达式，来指导Lisp启动Swank服务器并且将端口号写入文件。启动时，Slime启动一个Lisp进程并将此函数的结果发送给Lisp的标准输入。默认情况下，slime-init-command会被使用。“2.5.3 更快地加载Swank”里有一个例子。
+- INIT-FUNCTION
+  应该是一个不接受参数的函数。连接建立之后它会被调用。（见 6.1.1 钩子 slime-connected-hook）
+- ENV
+  一个为子进程指定环境变量的列表。例如：
+#+BEGIN_SRC emacs-lisp
+    (sbcl-cvs ("/home/me/sbcl-cvs/src/runtime/sbcl"
+	       "--core" "/home/me/sbcl-cvs/output/sbcl.core")
+	      :env ("SBCL_HOME=/home/me/sbcl-cvs/contrib/"))
+#+END_SRC
+在子进程中初始化SBCL_HOME。
+
