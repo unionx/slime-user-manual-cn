@@ -84,3 +84,39 @@ cvs checkout -rFAIRLY-STABLE slime
 cvs diff -rHEAD ChangeLog      # or: -rFAIRLY-STABLE
 #+END_SRC
 
+
+** 2.3 安装
+
+
+如果你已经有了一个可以从命令行启动的Lisp实现，那么仅需在.emacs文件中添加几行即可安装成功：
+
+
+#+BEGIN_SRC emacs-lisp
+(setq inferior-lisp-program "/opt/sbcl/bin/sbcl") ; your Lisp system
+(add-to-list 'load-path "~/hacking/lisp/slime/")  ; your SLIME directory
+(require 'slime)
+(slime-setup)
+#+END_SRC
+
+
+在README文件里也可以见到上面这些代码。你可以从那里复制粘贴，但要记得替换正确的路径。
+
+
+这是没有其它杂项的最小化配置。如果基本配置可以工作，那么你可以试附加模块。（8.1 加载扩展包）
+
+
+我们建议如果你要使用Slime就不要在Emacs里加载ILISP包。如果你这么做了，那么在编辑Lisp源文件时就会加入许多键绑定，而且这些键绑定可能会跟Slime启动的Lisp进程发生冲突而无法正常工作。
+
+
+** 2.4 启动Slime
+
+
+Emacs命令M-x slime可以启动Slime。它使用inferior-lisp包来启动一个Lisp进程，加载并启动Lisp端服务器（叫做“Swank”），然后在Emacs和Lisp之间建立一个socket连接。最后会生成一个REPL缓冲区，你可以在这里输入Lisp表达式并求值。
+
+
+于是现在Slime启动完成，你可以开始使用了。
+
+
+** 2.5 调整设置
+
+
