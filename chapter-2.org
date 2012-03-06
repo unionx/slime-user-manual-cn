@@ -182,8 +182,7 @@ Emacs命令M-x slime可以启动Slime。它使用inferior-lisp包来启动一个
   一个为子进程指定环境变量的列表。例如：
 #+BEGIN_SRC emacs-lisp
 (sbcl-cvs ("/home/me/sbcl-cvs/src/runtime/sbcl"
-	   "--core" "/home/me/sbcl-cvs/output/sbcl.core")
-	  :env ("SBCL_HOME=/home/me/sbcl-cvs/contrib/"))
+	   "--core" "/home/me/sbcl-cvs/output/sbcl.core") :env ("SBCL_HOME=/home/me/sbcl-cvs/contrib/"))
 #+END_SRC
 在子进程中初始化SBCL_HOME。
 
