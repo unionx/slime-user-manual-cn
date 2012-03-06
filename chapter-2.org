@@ -27,3 +27,60 @@ Slime广泛地支持多种操作系统和Lisp实现。Slime可以在类Unix系�
 
 绝大部分特性在不同实现上的表现都是一致的，但是有些可能会有所不同。这些包括放置编译信息的注释的精度、XREF支持以及调试器命令（例如“重启缓冲区”）。
 
+
+** 2.2 下载Slime
+
+
+你可以选择使用发行版本的Slime或者直接通过CVS仓库使用Slime。你可以从我们的网站下载最新发布版本：[[http://www.common-lisp.net/project/slime/]]。
+
+
+我们建议加入了slime-dev邮件列表的用户使用CVS版本的代码。
+
+
+*** 2.2.1 从CVS下载
+
+
+可以从common-lisp.net的CVS仓库取得Slime。你可以选择使用最新版本的代码或者是带有FAIRLY-STABLE标签的快照版本。
+
+
+跟FAIRLY-STABLE版本的代码相比，最新版本的代码可能有更多的特性和更少的BUG，但也有可能因为较大的改动而不稳定。根据经验法则，我们建议如果你加入了slime-dev邮件列表，你最好使用最新版本（当进行主要的变动时，我们会发出通告）。如果你没有加入邮件列表，你就无法得知最新版本代码的情况，所以使用FAIRLY-STABLE或者发布版本是一个安全的选择。
+
+
+如果你从CVS迁出代码，记得经常更新。经常会有小的改进提交上去，而FAIRLY-STABLE标签也会随时推进。
+
+
+*** 2.2.2 CVS咒语
+
+
+要下载Slime你要先配置你的CVSROOT并且登录到仓库。
+
+
+#+BEGIN_SRC sh
+export CVSROOT=:pserver:anonymous@common-lisp.net:/project/slime/cvsroot
+cvs login
+#+END_SRC
+
+
+最新版的代码可以通过以下方式迁出：
+
+
+#+BEGIN_SRC sh
+cvs checkout slime
+#+END_SRC
+
+
+或者可以通过以下方式迁出FAIRLY-STABLE版本：
+
+
+#+BEGIN_SRC sh
+cvs checkout -rFAIRLY-STABLE slime
+#+END_SRC
+
+
+如果你想知道最新版本的代码跟你运行的版本有什么新的东西，你可以将本地的ChangeLog和版本仓库的进行对比：
+
+
+#+BEGIN_SRC sh
+cvs diff -rHEAD ChangeLog      # or: -rFAIRLY-STABLE
+#+END_SRC
+
