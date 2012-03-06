@@ -195,8 +195,8 @@ Emacs命令M-x slime可以启动Slime。它使用inferior-lisp包来启动一个
 
 #+BEGIN_SRC sh
 shell$ sbcl
-* (mapc 'require '(sb-bsd-sockets sb-posix sb-introspect sb-cltl2 asdf))
-* (save-lisp-and-die "sbcl.core-for-slime")
+(mapc 'require '(sb-bsd-sockets sb-posix sb-introspect sb-cltl2 asdf))
+(save-lisp-and-die "sbcl.core-for-slime")
 #+END_SRC
 
 
@@ -214,8 +214,8 @@ shell$ sbcl
 
 #+BEGIN_SRC sh
 shell$ sbcl
-* (load ".../slime/swank-loader.lisp")
-* (swank-loader:dump-image "sbcl.core-with-swank")
+(load ".../slime/swank-loader.lisp")
+(swank-loader:dump-image "sbcl.core-with-swank")
 #+END_SRC
 
 
