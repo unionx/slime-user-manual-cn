@@ -1,0 +1,29 @@
+* 二、开始
+
+
+本章告诉你如何配置和启动Slime。
+
+
+** 2.1 支持平台
+
+
+Slime广泛地支持多种操作系统和Lisp实现。Slime可以在类Unix系统、Mac OSX和Microsoft Windows上运行。GNU Emacs 21、22和23以及XEmacs 21都可以运行Slime。
+
+
+粗略地根据支持的良好程度来排序的话，所有支持的Lisp实现为：
+
+
+- CMU Common Lisp（CMUCL），19d版或更新
+- Steel Bank Common Lisp（SBCL），1.0版或更新
+- Clozure Common Lisp（CCL），1.3版或更新
+- LipsWorks，4.3版或更新
+- Allegro Common Lisp（ACL），6版或更新
+- CLISP，2.35版或更新
+- Armed Bear Common Lisp（ABCL）
+- Corman Common Lisp，2.51版或更新，需要[[http://www.grumblesmurf.org/lisp/corman-patches]]的补丁
+- Scieneer Common Lisp（SCL），1.2.7版或更新
+- Embedded Common Lisp（ECL）
+
+
+绝大部分特性在不同实现上的表现都是一致的，但是有些可能会有所不同。这些包括放置编译信息的注释的精度、XREF支持以及调试器命令（例如“重启缓冲区”）。
+
