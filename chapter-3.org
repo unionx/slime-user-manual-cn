@@ -26,3 +26,12 @@ Slime的所有命令都通过slime-mode提供。它是一个与Emacs的lisp-mode
 
 
 对这些“描述性的”缓冲区的初始聚焦由变量slime-description-autofocus确定。如果它是nil（默认的），这些描述性缓冲区不会自动聚焦，反之则会。
+
+
+*** 3.1.2 *inferior-lisp*缓冲区
+
+
+Slime在内部使用comint包来启动Lisp进程。这会产生一些用户可见的结果，有些是好的，另一些则不是。为了避免产生疑惑，理解其交互特性是很有用的。
+
+
+*inferior-lisp*缓冲区包含有Lisp进程自己的top-level。这个与Lisp的直接连接对错误排查很有用，并且使用inferior-slime-mode可以达到某种程度上的Slime集成。许多人选择加载更好的集成模块SLIME REPL包（见8.2 REPL）而无视*inferior-lisp*缓冲区。（见8.1 加载扩展包 获得更多关于启动REPL的信息。）
