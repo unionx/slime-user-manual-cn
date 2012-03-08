@@ -78,3 +78,18 @@ Slime在内部使用comint包来启动Lisp进程。这会产生一些用户可�
 
   对区域进行求值
 
+- C-c C-p 或 M-x slime-pprint-eval-last-expression
+
+  对光标前的表达式进行求值并将结果漂亮地打印在一个新的缓冲区里
+
+- C-c E 或 M-x slime-edit-value
+
+  在一个叫做“Edit <form>”的新缓冲区里编辑一个可以setf的形式的值。这个值会被插入一个临时缓冲区以便编辑，然后用C-c C-c命令来提交设置于Lisp中。
+
+- C-x M-e 或 M-x slime-eval-last-expression-display-output
+  
+  对光标前的表达式求值并将结果打印在显示缓冲区里。如果表达式会写一些内容到输出流的话这会很有用。
+
+- C-c C-u 或 M-x slime-undefine-function
+
+  用fmakunbound来取消当前光标处函数的定义。
