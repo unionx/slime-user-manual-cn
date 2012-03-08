@@ -57,13 +57,13 @@ Slime在内部使用comint包来启动Lisp进程。这会产生一些用户可�
 
 这些命令每一个都以不同的方式来对一个Common Lisp表达式求值。一般来说它们模仿Emacs Lisp的求值命令。默认情况下它们会在显示区显示出结果，但是一个前缀参数会让结果插入到当前缓冲区中。
 
-- C-x C-e
-  M-x M-x slime-eval-last-expression
+- C-x C-e \\
+  M-x M-x slime-eval-last-expression \\
   对光标前的表达式求值并且将结果显示到显示区
 
 
-- C-M-x
-  M-x slime-eval-defun
+- C-M-x \\
+  M-x slime-eval-defun \\
   对当前toplevel的形式进行求值并将结果打印到显示区。“C-M-x”会特别对待“defvar”。正常来讲，如果定义的变量已经有一个值了，“defvar”表达式不会做任何事情。但是“C-M-x”命令无条件的将“defvar”表达式里定义的值初始化并赋予指定的值。这个特性十分便于调试Lisp程序。
 
 
