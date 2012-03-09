@@ -93,3 +93,64 @@ Slime在内部使用comint包来启动Lisp进程。这会产生一些用户可�
 - C-c C-u 或 M-x slime-undefine-function
 
   用fmakunbound来取消当前光标处函数的定义。
+
+
+** 3.3 编译命令
+
+
+Slime有许多很好的命令来编译函数、文件和包。好的地方在于，很多Lisp编译器生成的提示和警告会被拦截，然后直接注释给Lisp源文件缓冲区里相应的表达式。（试一试看会发生什么。）
+
+
+- C-c C-c 或 M-x slime-compile-defun
+
+  编译光标处的top-level形式。被选择的区域会闪一下以给出回应，表明是哪一部分被选择了。若给了一个（正的）前缀参数的时候，形式会以最小调试设置来编译。若是一个负的前缀参数，编译速度会被优化。区域里的代码在编译之后将要被执行，总的来说，此命令将该区域写入一个文件，编译该文件，然后加载结果代码。
+
+- C-c C-k 或 M-x slime-compile-and-load-file
+  
+  编译和加载当前缓冲区的源文件。如果编译步骤失败了，那么文件不会被加载。编译是否失败并不总是那么容易判断的：某些情况下你可能会在加载阶段进入调试器。
+
+- C-c M-k 或 M-x slime-compile-file
+
+  编译（但不加载）当前缓冲区的源文件。
+
+- C-c C-l 或 M-x slime-load-file
+
+  加载Lisp文件。此命令用到了Common Lisp的LOAD函数。
+
+- M-x slime-compile-region
+
+  编译选中的区域。
+
+
+Slime通过在源代码的形式下加下划线来表示有提示信息。可以通过将鼠标置于文本处或者下面这些选择命令来阅读带有提示信息的编译器消息。
+
+
+- M-n 或 M-x slime-next-note
+
+  将光标移到下一个编译器消息处并显示消息。
+
+- M-p 或 M-x slime-previous-note
+
+  将光标移到上一个编译器消息处并显示消息。
+
+- C-c M-c 或 M-x slime-remove-notes
+
+  删除缓冲区里的所有提示信息。
+
+- C-x ‘ 或 M-x next-error
+
+  访问下一个错误消息。实际上这不是一个Slime命令，Slime会创建一个隐藏的缓冲区，然后大部分的编译模式的命令（见info “emacs”文件的“Compilation Mode”节点）都会类似批处理编译器一样地编译Lisp。
+
+
+
+** 3.4 补全命令
+
+
+补全命令的作用是根据光标处已有的东西来补全一个符号或者形式。典型的补全假设一个确定的前缀，给出的选择也只是可能发生的分支。模糊补全会做更多的尝试。
+
+
+- M-TAB 或 M-x slime-complete-symbol
+
+  补全光标处的符号。注意，Slime里有三种模式的补全；默认的模式跟正常的Emacs补全类似（见6.1 slime-complete-symbol-function）
+
+
