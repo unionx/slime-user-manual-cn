@@ -154,3 +154,33 @@ Slime通过在源代码的形式下加下划线来表示有提示信息。可以
   补全光标处的符号。注意，Slime里有三种模式的补全；默认的模式跟正常的Emacs补全类似（见6.1 slime-complete-symbol-function）
 
 
+** 3.5 查找定义（“Meta-Point”命令）
+
+
+Slime提供了熟悉的M-.命令。对于广泛函数来讲此命令会找出所有的方法，而在某些系统上它会做一切其它事情（例如根据DEFSTRUCT定义来追踪结构访问器）。
+
+
+- M-. 或 M-x slime-edit-definition
+  
+  跳至光标处符号的定义处
+
+- M-, 或 M-* 或 M-x slime-pop-find-definition-stack
+
+  回到M-.命令执行的光标处。如果M-.被执行了多次，那么此命令会多重地回溯。
+
+- C-x 4 . 或 M-x slime-edit-definition-other-window
+
+  类似slime-edit-definition，但是会跳到另一个窗口来编辑其定义。
+
+- C-x 5 . 或 M-x slime-edit-definition-other-frame
+  
+  类似slime-edit-definition，但是会跳到另一个框架来编辑其定义。
+
+- M-x slime-edit-definition-with-etags
+
+  使用ETAGES的表来寻找当前光标处的定义。
+
+
+** 3.6 文档命令
+
+Slime的在线文档命令效仿了Emacs的例子。这些命令都以C-c C-d为前缀，并且允许更改其键绑定或者取消更改（见 3.1.4 键绑定）
