@@ -45,6 +45,47 @@ Slime在内部使用comint包来启动Lisp进程。这会产生一些用户可�
 
 此建议十分有用。Emacs的在线帮助机制是你最快捷、最完整和最新的关于键绑定的信息来源。它们是你的朋友：
 
+- C-h k <key> 或者 M-x describe-key <key>
+
+  描述当前缓冲区的绑定到<key>的函数。
+
+- C-h b 或 describe-bindings
+
+  列出当前缓冲区的所有键绑定。
+
+- C-h m 或 describe-mode
+
+  显示所有当前缓冲区可用的major-mode的命令，然后是所有的minor-mode的命令。
+
+- C-h l 或 view-lossage
+
+  按顺序显示出你刚刚按了的所有按键的序列。
+
+注意：在本文档里C-h指定的意思是一个“典型键绑定”（canonical key），它可能是Ctrl-h或者是F1。或者是普通情况下你的.emacs文件里配置的help-command函数的绑定。下面是一种情形：
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key [f1]   'help-command)
+(global-set-key "\C-h" 'delete-backward-char)
+#+END_SRC
+
+在这种情况下，在本文档中任何地方你看到的C-h你都可以用F1来代替。
+
+你可以像这样用global-set-key函数在你的~/.emacs文件里全局地更改默认的键绑定：
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key "\C-c s" 'slime-selector)
+#+END_SRC
+
+这会绑定slime-select函数到C-c s。
+
+或者，如果你只是想在特定的slime模式下新建或改变键绑定，你可以像这样在你的~/.emacs文件里使用define-key函数：
+
+#+BEGIN_SRC emacs-lisp
+(define-key slime-repl-mode-map (kbd "C-c ;") 'slime-insert-balanced-comments)
+#+END_SRC
+
+这会在REPL缓冲区里绑定slime-insert-balanced-comments函数到C-c ;键绑定。
+
 ** 3.2 求值命令
 
 这些命令每一个都以不同的方式来对一个Common Lisp表达式求值。一般来说它们模仿Emacs Lisp的求值命令。默认情况下它们会在显示区显示出结果，但是一个前缀参数会让结果插入到当前缓冲区中。
