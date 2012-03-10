@@ -1,16 +1,11 @@
 * 一、简介
 
-
 Slime的意思是“Emacs下优秀的Lisp交互式开发模式”。
-
 
 通过支持Common Lisp的交互式编程，Slime扩展了Emacs。所以的特性都基于slime-mode，一个Emacs的minor-mode，它为标准的lisp-mode提供补充。lisp-mode为编辑Lisp源文件提供支持，而slime-mode则提供了与一个Lisp进程进行交互的功能，包括编译、调试、文档查找等等。
 
-
 slime-mode开发环境效仿Emacs原生的Emacs Lisp环境。我们也从某些类似的系统（例如ILISP）那里借鉴了一些，当然也包括我们自己的想法。
 
-
 Slime由两部分组成：用Emacs Lisp写的用户界面，和用Common Lisp写的服务器端。这两部分通过套接字连接在一起，并且使用一个类似于RPC的协议通信。
-
 
 服务器端的Lisp主要是可移植的Commom Lisp。所需要的跟特定Lisp实现相关的特性都由一个接口定义好，然后由不同的Lisp实现提供。这使得Slime非常容易移植。
