@@ -201,3 +201,106 @@ Slime提供了熟悉的M-.命令。对于广泛函数来讲此命令会找出所
 ** 3.6 文档命令
 
 Slime的在线文档命令效仿了Emacs的例子。这些命令都以C-c C-d为前缀，并且允许更改其键绑定或者取消更改（见 3.1.4 键绑定）
+
+- SPC 或 M-x slime-space
+  
+  Space键插入一个空格键，并且也查找并显示出当前光标处函数的参数列表，如果有的话。
+
+- C-c C-d d 或 M-x slime-describe-symbol
+
+  描述当前光标处的符号。
+
+- C-c C-d f 或 M-x slime-describe-function
+
+  描述当前光标处的函数。
+
+- C-c C-d a 或 M-x slime-apropos
+
+  对于一个正则表达式执行一个合适的搜索，来搜索所有的Lisp符号名称，并且显示出相应的文档字符串。默认情况下所有包的外部变量都会被搜索，你可以用一个前缀参数来指定特定的包或者是否包含未导出的符号。
+
+- C-c C-d z 或 M-x slime-apropos-all
+
+  类似slime-apropos但是默认包含所有内部符号。
+
+- C-c C-d p 或 M-x slime-apropos-package
+
+  显示包内所有符号的合适的结果。这个命令是用来在一个较高层次浏览包的。加上包名补全，它可以差不多被当作是一个Smalltalk类似的图像浏览器。
+
+- C-c C-d h 或 M-x slime-hyperspec-lookup
+
+  在《Common Lisp Hyperspec》里查找当前光标处的符号。它使用常用的hyperspec.el来在浏览器里显示相应的部分。Hyperspec可以在网络上或者在common-lisp-hyperspec-root处，默认打开的浏览器通过browse-url-browser-function指定。
+
+  注意：这里就是一个C-c C-d h跟C-c C-d C-h不同的例子
+
+- C-c C-d ~ 或 M-x hyperspec-lookup-format
+
+  在《Common Lisp Hyperspec》里查找一个foramt格式控制符。
+
+- C-c C-d # 或 M-x hyperspec-lookup-reader-macro
+
+  在《Common Lisp Hyperspec》里查找一个读取宏。
+
+** 3.7 交叉引用命令
+
+Slime的交叉引用命令是基于Lisp系统的支持的，而此特性在不同Lisp实现上差异颇大。对于那些没有内置XREF支持的Lisp系统，Slime需要一个可移植的XREF包，这个包是从CMU AI Repository获得并且与Slime绑定在一起的。
+
+所以这些命令的操作对象都是当前光标处的符号，如果没有，则会要求用户输入。如果有前缀参数，则总会要求用户输入符号。你可以输入以下所示的键绑定，或者将最后一个键加上control。见 3.1.4 键绑定。
+
+- C-c C-w c 或 M-x slime-who-calls
+
+  显示该函数的调用者。
+
+- C-c C-w c 或 M-x slime-who-calls
+
+  显示该函数调用了的函数。
+
+- C-c C-w r 或 M-x slime-who-references
+
+  显示对全局变量的引用。
+
+- C-c C-w b 或 M-x slime-who-binds
+
+  显示对全局标量的绑定。
+
+- C-c C-w s 或 M-x slime-who-sets
+
+  显示对全局标量的赋值。
+
+- C-c C-w m 或 M-x slime-who-macroexpands
+
+  显示某个宏扩展之后的结果。
+
+- M-x slime-who-specializes
+
+  显示一个类所有已知的方法。
+
+当然也有所谓的“列出调用者/被调用者”命令。这些操作会在一个很底层的层次上搜寻堆上的函数对象，来确定所有调用的情况。只有某些Lisp系统有此功能，并且在无法获得精确的XREF信息时，这些功能可以作为备用。
+
+- C-c < 或 M-x slime-list-callers
+
+  列出一个函数的所有调用者。
+
+- C-c > 或 M-x slime-list-callees
+
+  列出一个函数所有调用的函数。
+
+*** 3.7.1 XREF缓冲区命令
+
+XREF缓冲区可用的命令。
+
+- RET 或 M-x slime-show-xref
+
+  在另一个窗口里显示当前光标处的符号的定义。不离开XREF缓冲区。
+
+- Space 或 M-x slime-goto-xref
+
+  在另一个窗口里显示当前光标处的符号的定义并且关闭XREF缓冲区。
+
+- C-c C-c 或 M-x slime-recompile-xref
+
+  重新编译当前光标处的定义。
+
+- C-c C-c 或 M-x slime-recompile-all-xrefs
+
+  重新编译所有定义。
+
