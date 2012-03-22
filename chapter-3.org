@@ -304,3 +304,64 @@ XREF缓冲区可用的命令。
 
   重新编译所有定义。
 
+** 3.8 宏扩展命令
+
+- C-c C-m 或 M-x slime-macroexpand-1
+
+  将光标处的表达式宏展开一次。如果带有一个前缀参数，则使用macroexpand代替macroexpand-1。
+
+- C-c M-m 或 M-x slime-macroexpand-all
+
+  将光标处的表达式完全宏展开。
+
+- M-x slime-compiler-macroexpand-1
+
+  显示光标处的编译宏展开的sexp。
+
+- M-x slime-compiler-macroexpand
+
+  反复展开光标处的编译宏的sexp。
+
+更多的minor-mode命令及相关讨论见5.2 slime-macroexpansion-minor-mode。
+
+** 3.9 分解命令
+
+- C-c M-d 或 M-x slime-disassemble-symbol
+
+  分解光标处的函数定义。
+
+- C-c C-t 或 M-x slime-toggle-trace-fdefinition
+
+  触发对光标处函数的跟踪。若有前缀参数，则读取附加信息，例如跟踪某个指定的方法。
+
+- M-x slime-untrace-all
+
+  停止跟踪所有函数。
+
+** 3.10 中止/恢复命令
+
+- C-c C-b 或 M-x slime-interrupt   
+
+  中断Lisp进程（发送SIGINT）。
+
+- M-x slime-restart-inferior-lisp
+
+  重启inferior-lisp进程。
+
+- C-c ~ 或 M-x slime-sync-package-and-default-directory
+
+  从Emacs到Lisp同步当前包到工作目录。
+
+- C-c M-p 或 M-x slime-repl-set-package
+
+  设置REPL的包。
+
+- M-x slime-cd
+
+  设置Lisp进程所在的当前目录。这也改变了REPL的当前目录。
+
+- M-x slime-pwd
+
+  打印出Lisp进程的当前目录。
+
+
