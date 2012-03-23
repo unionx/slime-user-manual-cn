@@ -364,4 +364,63 @@ XREF缓冲区可用的命令。
 
   打印出Lisp进程的当前目录。
 
+** 3.11 检查命令
 
+Slime查看器是一个基于Emacs的对普通INSPECT函数的替代选择。Slime查看器会在一个Emacs缓冲区中结合使用文本和对其它对象的超链接来展示一个对象。
+
+Slime查看器可以轻易地为你的程序里的对象做定制化。详细用法见swank-backend.lisp里的inspect-for-emacs广泛函数。
+
+- C-c I 或 M-x slime-inspect
+
+  查看输入在一个迷你缓冲区里的表达式的值。
+
+在查看器里可以使用的标准命令有：
+
+- RET 或 M-x slime-inspector-operate-on-point
+
+  如果光标处是一个值，那么对这个值递归地调用查看器查看它。如果光标处是一个命令，则调用它。
+
+- d 或 M-x slime-inspector-describe
+
+  描述光标处的槽。
+
+- v 或 M-x slime-inspector-toggle-verbose
+
+  在冗余模式和简洁模式之间切换。默认值由swank:*inspector-verbose*指定。
+
+- l 或 M-x slime-inspector-pop
+
+  回到前一个对象（从RET返回）。
+
+- n 或 M-x slime-inspector-next
+
+  l的逆操作。也绑定到了空格键。
+
+- g 或 M-x slime-inspector-reinspect
+
+  再次查看。
+
+- q 或 M-x slime-inspector-quit
+
+  关闭查看缓冲区。
+
+- p 或 M-x slime-inspector-pprint
+
+  在另一个缓冲区里打印出光标处的对象。
+
+- . 或 M-x slime-inspector-show-source
+
+  查看光标处的对象的源码。
+
+- > 或 M-x slime-inspector-fetch-all
+
+  取得所有查看器的内容并且移到其最后。
+
+- M-RET 或 M-x slime-inspector-copy-down
+
+  将光标之后所有在“*”变量里的值存储起来。这些对象可以之后在REPL中访问。
+
+- TAB, M-x slime-inspector-next-inspectable-object 或 S-TAB, M-x slime-inspector-previous-inspectable-object
+
+  分别是跳至下一个或者前一个可查看对象。
+  
