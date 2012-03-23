@@ -11,3 +11,6 @@
 
 *** 注意事项
     末学能力有限，难免有翻译不当之处。issue里有我自感翻译不当之处，若大家有疑问，也请留言告之。多谢。
+
+*** 一个介绍Slime用法的视频
+    http://v.youku.com/v_show/id_XMjcyNTA4NTE2.html
