@@ -35,7 +35,7 @@ Slime广泛地支持多种操作系统和Lisp实现。Slime可以在类Unix系�
 
 如果你从CVS迁出代码，记得经常更新。经常会有小的改进提交上去，而FAIRLY-STABLE标签也会随时推进。
 
-*** 2.2.2 CVS咒语
+*** 2.2.2 使用CVS
 
 要下载Slime你要先配置你的CVSROOT并且登录到仓库。
 
