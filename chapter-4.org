@@ -55,3 +55,59 @@ Slime有一个自己的基于Emacs的调试器，SLDB。Lisp系统里的状况�
   通过数字触发重启。
 
 重启也可以通过在缓冲区里按RET或者Mouse-2来触发。
+
+** 4.3 在不同的窗口间操作
+
+- n 或 M-x sldb-down， p 或 M-x sldb-up
+
+  在不同窗口间移动。
+
+- M-n 或 M-x sldb-details-down， M-p 或 M-x sldb-details-up
+
+  有技巧地在不同窗口间移动：隐藏之前窗口的详细信息，显示下一个窗口的详细信息和源代码。这些小技巧让你只看到当前窗口的详细信息和源代码。
+
+- > 或 M-x sldb-end-of-backtrace
+
+  获取所有的堆栈调用并且到最后一个窗口。
+
+- < 或 M-x sldb-beginning-of-backtrace 
+
+  到第一个窗口。
+
+** 4.4 单步调试
+
+单步调试并非在所有的Lisp实现里都是可用的，在那些可用的Lisp实现中，它的表现也很不同。
+
+- s 或 M-x sldb-step
+
+  单步运行窗口中的下一个表达式。对CMUCL来说，即时在从当前位置可到达的所有代码的位置上设置断点。
+
+- x 或 M-x sldb-next
+
+  单步运行函数里的下一个形式。
+
+- o 或 M-x sldb-out
+
+  暂时停止单步调试，当前函数一返回则恢复单步调试。
+
+** 4.5 其它命令
+
+- r 或 M-x sldb-restart-frame
+
+  以当前窗口最先运行时的参数为参数重启。（此命令并非在所有Lisp实现里都可用）
+
+- R 或 M-x sldb-return-from-frame
+
+  在minibuffer里输入一个值，并以这个值为返回值回到窗口。（此命令并非在所有Lisp实现里都可用）
+
+- B 或 M-x sldb-break-with-default-debugger
+
+  退出SLDB并且以Lisp默认的调试器调试状况。
+
+- C 或 M-x sldb-inspect-condition
+
+  查看当前正在调试的状况。
+
+- : 或 M-x slime-interactive-eval
+
+  在minibuffer里输入一个表达式并求值。
