@@ -1,0 +1,6 @@
+* 四、SLDB：Slime调试器
+
+Slime有一个自己的基于Emacs的调试器，SLDB。Lisp系统里的状况（Condition）发出的信号会在Emacs里通过Lisp符号*DEBUGGER-HOOK*触发SLDB。
+
+当有状况发出信号时，SLDB会生成一个新的缓冲区。这个缓冲区会显示对状况的描述、一系列重启选项和调用栈。可以通过提供的命令来出发重启、检查调用栈和在堆栈调用帧里移动。
+
