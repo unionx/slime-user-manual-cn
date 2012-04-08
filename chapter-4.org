@@ -2,5 +2,56 @@
 
 Slime有一个自己的基于Emacs的调试器，SLDB。Lisp系统里的状况（Condition）发出的信号会在Emacs里通过Lisp符号*DEBUGGER-HOOK*触发SLDB。
 
-当有状况发出信号时，SLDB会生成一个新的缓冲区。这个缓冲区会显示对状况的描述、一系列重启选项和调用栈。可以通过提供的命令来出发重启、检查调用栈和在堆栈调用帧里移动。
+当有状况发出信号时，SLDB会生成一个新的缓冲区。这个缓冲区会显示对状况的描述、一系列重启选项和调用栈。可以通过提供的命令来出发重启、检查调用栈和在堆栈调用窗口里移动。
 
+** 4.1 检查窗口
+
+用来查看光标处的堆栈调用窗口的命令。
+
+- t 或 M-x sldb-toggle-details
+
+  出发显示本地变量和CATCH标签
+
+- v 或M-x sldb-show-source
+
+  查看窗口处的当前代码表达式。此表达式会被展现在Lisp源代码的缓冲区里。
+
+- e 或 M-x sldb-eval-in-frame
+
+  对窗口里的表达式求值。表达式可以引用窗口里可用的局部变量。
+
+- d 或 M-x sldb-pprint-eval-in-frame
+  
+  对窗口里的表达式求值，并且在一个临时缓冲区里打印出来。
+
+- D 或 M-x sldb-disassemble
+
+  拆解窗口处的函数。包括例如窗口对指令指针等信息。
+
+- i 或 M-x sldb-inspect-in-frame
+
+  查看对窗口里一个函数求值后的结果。
+
+- C-c C-c 或 M-x sldb-recompile-frame-source
+
+  重新编译窗口。C-u C-c C-c 是以最大调试模式重新编译。
+
+** 4.2 重启
+
+- a 或 M-x sldb-abort
+
+  触发ABORT重启。
+
+- q 或 M-x sldb-quit
+
+  “QUIT”——THROW一个top-level的Slime请求循环可以捕获的标签。
+
+- c 或 M-x sldb-continue
+
+  触发CONTINUE重启。
+
+- 0 ... 9
+
+  通过数字触发重启。
+
+重启也可以通过在缓冲区里按RET或者Mouse-2来触发。
