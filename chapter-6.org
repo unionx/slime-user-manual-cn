@@ -76,4 +76,34 @@ Slime的Lisp服务器端（也叫做“Swank”），提供几个变量可供设
 
 - SWANK:*CONFIGURE-EMACS-INDENTATION*
 
-  
+  这个变量控制宏里&body参数的缩进方式是否会被探测到并发送给Emacs。它默认开启。
+
+- SWANK:*GLOBALLY-REDIRECT-IO*
+
+  当它为真，标准输出流（例如*standard-output*）会被全局重定向到Emacs里的REPL。当它为假（默认情况），这些流只是在处理请求时通过动态绑定临时重定向到Emacs。主意*standard-input*现在不会被全局重定向到Emacs，因为当它尝试从Emacs里读取信息时，它跟Lisp原生的REPL交互得很差。
+
+- SWANK:*GLOBAL-DEBUGGER*
+
+  当它为真（默认情况），它让*DEBUGGER-HOOK*全局设置为SWANK:SWANK-DEBUGGER-HOOK，当后让Slime处理Lisp进程里的所有调试工作。这是用来调试多线程或回调驱动的应用的。
+
+- SWANK:*SLDB-PRINTER-BINDINGS* 和 SWANK:*MACROEXPAND-PRINTER-BINDINGS* 和 SWANK:*SWANK-PPRINT-BINDINGS*
+
+  这些变量可以在不同的情况下设置打印器。这些变量的值是打印器变量名和对应的值组成的联合列表。例如，在SLDB中开启pretty打印器来处理调用栈，你可以这样：
+
+  #+BEGIN_SRC emacs-lisp
+  (push '(*print-pretty* . t) swank:*sldb-printer-bindings*)
+  #+END_SRC
+
+- SWANK:*USE-DEDICATED-OUTPUT-STREAM*
+
+  这个变量控制了是否用一个不安全但很有效的hack来从Lisp打印输出到Emacs。默认是nil，并且强烈建议不要使用它。
+
+  当它为t时，会建立一个单独的套接字来把Lisp的输出打印到Emacs，这比使用协议发送信息来将输出发送到Emacs快。但是，由于不能保证一个专用的输出流和一个给予协议消息的流之间的时间，Lisp命令的输出到达的时间可能在REPL相应时间之前或之后。输出结果和REPL的显示结果可能以错误的顺序呈现，甚至在REPL里交叉出现。使用一个专用的输出流也会让用SSH跟一个在远程服务器上的Lisp程序通信变得困难。（见 7.1 连接到远程Lisp）
+
+- SWANK:*DEDICATED-OUTPUT-STREAM-PORT*
+
+  当*USE-DEDICATED-OUTPUT-STREAM*是t，流会在此端口开启。默认值是0，表示流会在某个随机端口开启。
+
+- SWANK:*LOG-EVENTS*
+
+  将这个变量设置为t会让所有与Emacs交换的协议信息都打印到*TERMINAL-IO*。这在底层调试和观察Slime底层如何运行是很有用。*TERMINAL-IO*的输出可以在Lisp系统自己的监视器里看到，通常是*inferior-lisp*缓冲区。
