@@ -1,0 +1,43 @@
+* 六、定制
+
+** 6.1 Emacs端
+
+Slime的Emacs部分可以通过Emacs的定制系统来进行配置，通过M-x customize-group slime RET。由于此定制系统是自描述的，因此在本文档里我们只会包含某些重要的或者可能有歧义的选项。
+
+- slime-truncate-lines
+
+  在Slime生成的line-by-line摘要缓冲区里使用truncate-lines的值。这是默认的，来保证行不会被以某种回溯的列表来折叠。它可能会造成某些信息超出屏幕。
+
+- slime-complete-symbol-function
+
+  用来补全Lisp符号的函数。有三种补全方式：slime-simple-complete-symbol，slime-complete-symbol*（见 8.5 混合补全），和slime-fuzzy-complete-symbol（见 8.6 模糊补全）。
+
+  默认的是slime-simple-complete-symbol，类似于Emacs的补全方式。
+
+- slime-filename-translations
+
+  这个变量控制Emacs和Lisp之间文件名的转换。当你在不同的机器上运行Emacs和Lisp，而它们的文件系统并不相同，或者它们有相同的文件系统但是布局不同，例如使用了SMB的文件共享的时候，这个变量就有用了。
+
+- slime-net-coding-system
+
+  如果你想在Emacs和Lisp之间传送Unicode字符，你应该设置此变量。例如你使用SBCL，你应该这样设置：
+
+  #+BEGIN_SRC emacs-lisp
+  (setq slime-net-coding-system 'utf-8-unix)
+  #+END_SRC
+
+  要显示Unicode字符你还需要适当的字体，否则这些字符会被渲染成空心方块。如果你使用的是Allegro CL和GNU Emacs，你也可以使用emacs-mule-unix作为编码系统。GNU Emacs给较新的编码提供了很不错的字体。（不同的Lisp系统可以使用不同的编码，见 2.5.2 多种Lisp。）
+
+*** 6.1.1 钩子
+
+- slime-mode-hook
+  
+  每次有一个缓冲区进入slime-mode，这个钩子就会启动。它最有用的是在你的Lisp源代码缓冲区里设置当前缓冲区的配置。有个例子是用它来启动slime-autodoc-mode（见 8.7 slime-autodoc-mode）。
+
+- slime-connected-hook
+
+  这个钩子在每次连接到Lisp服务器的时候建立。有个例子是用它来生成一个打印窗口（见 8.13 打印窗口）。
+
+- sldb-hook
+
+  这个钩子在SLDB启动时创建。这个钩子的函数是从SLDB缓冲区建立后调用的。有个例子是添加add sldb-print-condition函数到这个钩子，这会让所有SLDB调试的状况被REPL缓冲区记录到。
