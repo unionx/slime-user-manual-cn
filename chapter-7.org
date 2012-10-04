@@ -1,6 +1,5 @@
 * 七、小技巧
 
-
 ** 7.1 连接到远程Lisp
 
 *** 7.1.1 设置Lisp镜像
@@ -66,7 +65,7 @@
 
 最后，我们启动Slime：
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
   M-x slime-connect RET RET
 #+END_SRC
 
@@ -80,7 +79,7 @@ RET RET按键表示我们要使用默认主机（127.0.0.1）和默认端口（4
 
 我们需要做的事情是让Emacs接收一个远程机器上的文件名，然后将其翻译为某种tramp可以理解和使用的格式，反之亦然。假设远程机器的主机名叫做remote.example.com，cl:machine-instance返回“remote”，我们以“user”用户登陆，我们使用slime-tramp扩展包来设置适当的翻译方式，如下：
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
   (push (slime-create-filename-translator :machine-instance "remote.example.com"
                                           :remote-host "remote"
                                           :username "user")
@@ -91,7 +90,7 @@ RET RET按键表示我们要使用默认主机（127.0.0.1）和默认端口（4
 
 默认情况下Slime并不会改变*standard-output*和REPL以外的其它事物。如果你有一些其它的线程，例如format，write-string等等，相应的输出仅仅能在*inferior-lisp*缓冲区或者是终端下看到，通常来说这很不方便。所以如果你有这样的代码：
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
   (run-in-new-thread
    (lambda ()
      (write-line "In some random thread.~%" *standard-output*)))
@@ -105,7 +104,7 @@ RET RET按键表示我们要使用默认主机（127.0.0.1）和默认端口（4
 
 如果想要在打开一个Lisp文件的时候自动启动Slime，将以下设置加入~/.emacs文件里：
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
   (add-hook 'slime-mode-hook
             (lambda ()
               (unless (slime-connected-p)
