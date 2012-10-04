@@ -173,7 +173,7 @@ slime-repl-wrap-history变量控控制了环绕行为，即是如果到了末尾
 
 slime-mrepl扩展包为多监听者缓冲区提供了支持。M-x slime-open-listener命令创建一个新的缓冲区。在多线程Lisp里，每一个监听者都与一个单独的线程相连。在单线程Lisp里，创建多监听者缓冲区也是可以的，但是其命令都是在同一个进程里顺序执行的。
 
-** 8.4 inferior**slime**mode
+** 8.4 inferior-slime-mode
 
 inferior-slime-mode是一个用来与*inferior-lisp*缓冲区一起使用的次模式。它提供了一些Slime命令，例如符号补全和文档查询。它也跟踪Lisp进程的当前目录。将以下代码加入.emacs配置来使用它：
 
