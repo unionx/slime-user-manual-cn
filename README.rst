@@ -1,6 +1,8 @@
 Slime用户手册中文翻译版
 =====================
 
+在线阅读地址： `Read the Docs <https://slime-user-manual-cn.readthedocs.org/en/latest/>`_
+
 Slime是什么
 ------------
 
