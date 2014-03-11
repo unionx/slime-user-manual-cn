@@ -49,7 +49,7 @@
 
 ::
 
-   (swank:create-server :port 4005  :dont-close t :coding-system "utf-8-unix")
+   (swank:create-server :port 4005  :dont-close t)
 
 在Emacs端，你会进行类似如下的设置来连接到同一台机器上的Lisp镜像：
 
@@ -65,7 +65,7 @@
 
 ::
 
-   ssh -L4005:127.0.0.1:4005 username@remote.example.com
+   ssh -N -f -L 4005:127.0.0.1:4005 username@remote.example.com
 
 
 这里调用的ssh在本地机器的4005端口和远程机器的4005端口上建立了一个ssh连接 [#f3]_ 。
